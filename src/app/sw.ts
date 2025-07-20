@@ -1,12 +1,4 @@
-import { PAGES_CACHE_NAME } from '@serwist/next/worker'
-import {
-  CacheFirst,
-  ExpirationPlugin,
-  NetworkFirst,
-  RangeRequestsPlugin,
-  Serwist,
-  StaleWhileRevalidate,
-} from 'serwist'
+import { Serwist } from 'serwist'
 import type { PrecacheEntry, SerwistGlobalConfig } from 'serwist'
 
 declare global {
@@ -22,7 +14,7 @@ const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
   skipWaiting: true,
   clientsClaim: true,
-  navigationPreload: true,
+  navigationPreload: false,
   runtimeCaching: [],
   // runtimeCaching: [
   //   {
@@ -195,11 +187,9 @@ const serwist = new Serwist({
   //       if (!sameOrigin || pathname.startsWith('/api/auth/callback')) {
   //         return false
   //       }
-
   //       if (pathname.startsWith('/api/')) {
   //         return true
   //       }
-
   //       return false
   //     },
   //     method: 'GET',
